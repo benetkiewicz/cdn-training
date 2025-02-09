@@ -1,0 +1,266 @@
+---
+import Nav from "../components/Nav.astro"
+import Footer from "../components/Footer.astro"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn CDN - Content Delivery Networks</title>
+    <style is:global>
+        :root {
+            --primary: #6596b8;       /* Darker blue for better contrast */
+            --secondary: #e6e9ec;     /* Slightly darker background */
+            --accent: #e4a6c2;        /* Darker pink */
+            --text: #2b2b2b;          /* Darker text */
+            --text-light: #4a4a4a;    /* For secondary text */
+            --max-width: 1200px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            background-color: var(--primary);
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 2rem;
+            transition: opacity 0.2s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.9;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 2rem;
+            flex: 1;
+        }
+
+        .hero {
+            background-color: var(--secondary);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-light);
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .lesson-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+            border: 1px solid var(--secondary);
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .lesson-card h3 {
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-card p {
+            color: var(--text-light);
+        }
+
+        .lesson-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid var(--secondary);
+        }
+
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--secondary);
+        }
+
+        .button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: opacity 0.2s;
+            font-weight: 500;
+        }
+
+        .button:hover {
+            opacity: 0.9;
+        }
+
+        footer {
+            background-color: var(--secondary);
+            padding: 2rem 0;
+            margin-top: auto;
+            border-top: 1px solid #d1d5db;
+        }
+
+        .footer-content {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .footer-content a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-content a:hover {
+            text-decoration: underline;
+        }
+
+         /* Adding new styles for course and author sections */
+         .course-overview {
+            background-color: white;
+            padding: 4rem 0;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .course-feature {
+            padding: 1.5rem;
+            background: var(--secondary);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .course-feature h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .author-section {
+            background-color: var(--secondary);
+            padding: 4rem 0;
+        }
+
+        .author-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .author-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            margin: 0 auto;
+        }
+
+        .author-content h2 {
+            color: var(--text);
+            margin-bottom: 1rem;
+        }
+
+        .author-credentials {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .credential {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-light);
+        }
+
+        @media (max-width: 768px) {
+            .author-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .author-credentials {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <Nav />
+    <slot />
+    <Footer />
+</body>
+</html>
