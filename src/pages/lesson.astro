@@ -1,16 +1,46 @@
 ---
-import Layout from "../layouts/Layout.astro"
+import Layout from "../layouts/Layout.astro";
+import cdnDiagram from "../../public/lesson1/cdn-diagram.png";
 ---
 
+<style>
+    .image-wrapper {
+        background: #171717;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        width: 100%;
+    }
+</style>
 <Layout>
-	<div class="container">
+    <div class="container">
         <div class="lesson-content">
             <h2>1. Introduction to CDNs</h2>
             <div class="lesson-body">
-                <p>Content Delivery Networks (CDNs) are a crucial part of modern web infrastructure...</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p>Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida.</p>
+                <p>
+                    Content Delivery Networks (CDNs) are a crucial part of modern web infrastructure. They are
+                    geographically distrubuted servers, which are physically and logically closer to the end user,
+                    delivering web content faster and more efficiently. See the below diagram for a visual
+                    representation of how CDNs work.
+                </p>
+
+                <div class="image-wrapper">
+                    <img src={cdnDiagram.src} style="max-width: 100%; display: block;" alt="CDN Diagram" />
+                </div>
+
+                <p>
+                    The idea is that each client worldwide, instead of fetching content from one, centralized server
+                    across the world, can fetch content from a server that is closer to them. This reduces latency and
+                    improves the overall performance of the website.
+                </p>
+                <p>
+                    The magic of guessing which is the nearest server containing request contents is based into
+                    protocols that rule the internet. Verious CDN providers use mostly <em>Anycast Routing</em> or <em
+                        >GeoDNS</em
+                    > baked into DNS protocol.
+                </p>
             </div>
             <div class="lesson-nav">
                 <a href="#" class="button">Previous</a>
