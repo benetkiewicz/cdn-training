@@ -2,6 +2,50 @@
 import Layout from "../layouts/Layout.astro"
 ---
 
+<style>
+    .lessons-grid {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .lesson-card {
+            max-width: 30%;
+            background: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .lesson-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .lesson-card h3 {
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+
+        .lesson-card p {
+            color: var(--text-light);
+        }
+
+        /* The following lesson-specific styles have been moved to lesson.astro */
+        /* .lesson-content, .lesson-nav, .button styles, and pre/code styles removed */
+
+        @media (max-width: 768px) {
+            .lessons-grid {
+                flex-direction: column;
+            }
+
+            .lesson-card {
+                width: 100%;
+                max-width: 100%;
+            }
+        }
+</style>
 <Layout>
 	<div class="container lessons-grid">
         <div class="lesson-card">

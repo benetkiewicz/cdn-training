@@ -8,6 +8,7 @@ import Footer from "../components/Footer.astro"
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learn CDN - Content Delivery Networks</title>
+    <link href="prism-material-light.css" rel="stylesheet" />
     <style is:global>
         :root {
             --primary: #6596b8;       /* Darker blue for better contrast */
@@ -32,6 +33,7 @@ import Footer from "../components/Footer.astro"
             min-height: 100vh;
             display: flex;
             flex-direction: column;
+            overflow-x: hidden; /* Prevent horizontal scroll on the body */
         }
 
         nav {
@@ -68,9 +70,11 @@ import Footer from "../components/Footer.astro"
 
         .container {
             max-width: var(--max-width);
+            width: 100%;
             margin: 0 auto;
             padding: 1rem;
             flex: 1;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
         .hero {
@@ -92,15 +96,34 @@ import Footer from "../components/Footer.astro"
             color: var(--text-light);
         }
 
+        
+    .button {
+        display: inline-block;
+        width: 120px;
+        text-align: center;
+        padding: 0.8rem 1.5rem;
+        background-color: var(--primary);
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: opacity 0.2s;
+        font-weight: 500;
+    }
+
+    .button:hover {
+        opacity: 0.9;
+    }
+
         .lessons-grid {
             display: flex;
+            justify-content: space-between;
             flex-wrap: wrap;
             gap: 2rem;
             margin-top: 2rem;
         }
 
         .lesson-card {
-            max-width: 300px;
+            max-width: 30%;
             background: white;
             border-radius: 0.5rem;
             padding: 1rem;
@@ -120,15 +143,8 @@ import Footer from "../components/Footer.astro"
             color: var(--text-light);
         }
 
-        .lesson-content {
-            max-width: 900px;
-            margin: 0 auto;
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            border: 1px solid var(--secondary);
-        }
+        /* The following lesson-specific styles have been moved to lesson.astro */
+        /* .lesson-content, .lesson-nav, .button styles, and pre/code styles removed */
 
         @media (max-width: 768px) {
             .lessons-grid {
@@ -137,32 +153,8 @@ import Footer from "../components/Footer.astro"
 
             .lesson-card {
                 width: 100%;
+                max-width: 100%;
             }
-        }
-
-        .lesson-nav {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--secondary);
-        }
-
-        .button {
-            display: inline-block;
-            width: 120px;
-            text-align: center;
-            padding: 0.8rem 1.5rem;
-            background-color: var(--primary);
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: opacity 0.2s;
-            font-weight: 500;
-        }
-
-        .button:hover {
-            opacity: 0.9;
         }
 
         footer {
@@ -266,6 +258,13 @@ import Footer from "../components/Footer.astro"
                 justify-content: center;
                 flex-wrap: wrap;
             }
+        }
+
+        /* Add responsive image rules */
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
         }
     </style>
 </head>

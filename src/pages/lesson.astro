@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import cdnDiagram from "../../public/lesson1/cdn-diagram.png";
+import { Prism } from '@astrojs/prism';
 ---
 
 <style>
@@ -11,14 +12,46 @@ import cdnDiagram from "../../public/lesson1/cdn-diagram.png";
         justify-content: center;
         margin-top: 1rem;
         margin-bottom: 1rem;
+        overflow-x: hidden;
+        max-width: 100%;
+    }
+
+    /* Lesson specific styles moved from Layout */
+    .lesson-content {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        background: white;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        border: 1px solid var(--secondary);
         width: 100%;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        overflow-x: hidden;
+    }
+
+    .lesson-nav {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--secondary);
+    }
+
+    /* Code block styles for lessons */
+    pre, code {
+        max-width: 100%;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-x: auto;
     }
 </style>
 <Layout>
     <div class="container">
         <div class="lesson-content">
             <h2>1. Introduction to CDNs</h2>
-            <div class="lesson-body">
+            
                 <p>
                     Content Delivery Networks (CDNs) are a crucial part of modern web infrastructure. They are
                     geographically distrubuted servers, which are physically and logically closer to the end user,
@@ -27,7 +60,7 @@ import cdnDiagram from "../../public/lesson1/cdn-diagram.png";
                 </p>
 
                 <div class="image-wrapper">
-                    <img src={cdnDiagram.src} style="max-width: 100%; display: block;" alt="CDN Diagram" />
+                    <img src={cdnDiagram.src} alt="CDN Diagram" />
                 </div>
 
                 <p>
@@ -41,7 +74,17 @@ import cdnDiagram from "../../public/lesson1/cdn-diagram.png";
                         >GeoDNS</em
                     > baked into DNS protocol.
                 </p>
-            </div>
+                <Prism code={
+`using System;
+
+class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Hello World!");
+    }
+}`} lang="csharp" />
+        
             <div class="lesson-nav">
                 <a href="#" class="button">Previous</a>
                 <a href="#" class="button">Next</a>
