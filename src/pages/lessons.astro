@@ -1,5 +1,64 @@
 ---
+import { LessonCard } from "../components/LessonCard"
 import Layout from "../layouts/Layout.astro"
+
+interface Lesson {
+    id: number;
+    title: string;
+    subtitle: string;
+    link: string;
+}
+
+const lessons: Lesson[] = [
+    {
+        id: 1,
+        title: "1. Introduction to CDNs",
+        subtitle: "Understanding the basics of Content Delivery Networks and their importance",
+        link: "lesson"
+    },
+    {
+        id: 2,
+        title: "2. Fastly Caching Setup",
+        subtitle: "Step by step guide on how to put Fastly in front of your website",
+        link: "lesson"
+    },
+    {
+        id: 3,
+        title: "3. Custom Domain and SSL Setup",
+        subtitle: "How to setup a custom domain and SSL certificate for your website in Fastly",
+        link: "lesson"
+    },
+    {
+        id: 4,
+        title: "4. Various Adjustments to Cache Settings part 1",
+        subtitle: "How to change caching policy using Fastly UI and HTTP headers",
+        link: "lesson"
+    },
+    {
+        id: 5,
+        title: "5. Introduction to Varnish",
+        subtitle: "How abstraction over request/response cycle works in Varnish",
+        link: "lesson"
+    },
+    {
+        id: 6,
+        title: "6. Various Adjustments to Cache Settings part 2",
+        subtitle: "How to change caching policy using Varnish",
+        link: "lesson"
+    },
+    {
+        id: 7,
+        title: "7. Advanced Varnish",
+        subtitle: "Using ACLs, Edge dictionary and client API",
+        link: "lesson"
+    },
+    {
+        id: 8,
+        title: "8. Terraforming Fastly",
+        subtitle: "Configuration management with Terraform",
+        link: "lesson"
+    }
+];
 ---
 
 <style>
@@ -48,48 +107,8 @@ import Layout from "../layouts/Layout.astro"
 </style>
 <Layout>
 	<div class="container lessons-grid">
-        <div class="lesson-card">
-            <h3>1. Introduction to CDNs</h3>
-            <p>Understanding the basics of Content Delivery Networks and their importance</p>
-            <br>
-            <a href="lesson" class="button">Begin</a>
-        </div>
-        <div class="lesson-card">
-            <h3>2. CDN Architecture</h3>
-            <p>Deep dive into how CDNs work and their core components</p>
-            <br>
-            <a href="lesson" class="button">Begin</a>
-        </div>
-        <div class="lesson-card">
-            <h3>3. Implementation Guide</h3>
-            <p>Step-by-step guide to implementing a CDN for your website. What if there will be more content? And even more content? Will this wrap?</p>
-            <br>
-            <a href="lesson" class="button">Begin</a>
-        </div>
-        <div class="lesson-card">
-            <h3>2. CDN Architecture</h3>
-            <p>Deep dive into how CDNs work and their core components</p>
-            <p>Or a second paragraph. How does that look like?</p>
-            <br>
-            <a href="lesson" class="button">Begin</a>
-        </div>
-        <div class="lesson-card">
-            <h3>3. Implementation Guide</h3>
-            <p>Step-by-step guide to implementing a CDN for your website</p>
-            <br>
-            <a href="lesson" class="button">Begin</a>
-        </div>
-        <div class="lesson-card">
-            <h3>2. CDN Architecture</h3>
-            <p>Deep dive into how CDNs work and their core components</p>
-            <br>
-            <a href="lesson" class="button">Begin</a>
-        </div>
-        <div class="lesson-card">
-            <h3>3. Implementation Guide</h3>
-            <p>Step-by-step guide to implementing a CDN for your website</p>
-            <br>
-            <a href="lesson" class="button">Begin</a>
-        </div>
+        {lessons.map(lesson => (
+            <LessonCard title={lesson.title} subtitle={lesson.subtitle} link={lesson.link} />
+        ))}
     </div>
 </Layout>
