@@ -1,7 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import cdnDiagram from "../../public/lesson1/cdn-diagram.png";
-import { Prism } from '@astrojs/prism';
+import { Prism } from "@astrojs/prism";
 ---
 
 <style>
@@ -23,7 +23,7 @@ import { Prism } from '@astrojs/prism';
         background: white;
         padding: 1rem;
         border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         border: 1px solid var(--secondary);
         width: 100%;
         overflow-wrap: break-word;
@@ -40,7 +40,8 @@ import { Prism } from '@astrojs/prism';
     }
 
     /* Code block styles for lessons */
-    pre, code {
+    pre,
+    code {
         max-width: 100%;
         white-space: pre-wrap;
         word-wrap: break-word;
@@ -51,31 +52,47 @@ import { Prism } from '@astrojs/prism';
     <div class="container">
         <div class="lesson-content">
             <h2>1. Introduction to CDNs</h2>
-            
-                <p>
-                    Content Delivery Networks (CDNs) are a crucial part of modern web infrastructure. They are
-                    geographically distrubuted servers, which are physically and logically closer to the end user,
-                    delivering web content faster and more efficiently. See the below diagram for a visual
-                    representation of how CDNs work.
-                </p>
 
-                <div class="image-wrapper">
-                    <img src={cdnDiagram.src} alt="CDN Diagram" />
-                </div>
+            <p>
+                Content Delivery Networks (CDNs) are a crucial part of modern web infrastructure. They are
+                geographically distrubuted servers, which are physically and logically closer to the end user,
+                delivering web content faster and more efficiently. See the below diagram for a visual representation of
+                how CDNs work.
+            </p>
 
-                <p>
-                    The idea is that each client worldwide, instead of fetching content from one, centralized server
-                    across the world, can fetch content from a server that is closer to them. This reduces latency and
-                    improves the overall performance of the website.
-                </p>
-                <p>
-                    The magic of guessing which is the nearest server containing request contents is based into
-                    protocols that rule the internet. Verious CDN providers use mostly <em>Anycast Routing</em> or <em
-                        >GeoDNS</em
-                    > baked into DNS protocol.
-                </p>
-                <Prism code={
-`using System;
+            <div class="image-wrapper">
+                <img src={cdnDiagram.src} alt="CDN Diagram" />
+            </div>
+
+            <p>
+                The idea is that each client worldwide, instead of fetching content from one, centralized server across
+                the world, can fetch content from a server that is closer to them. This reduces latency and improves the
+                overall performance of the website.
+            </p>
+            <p>
+                The process of determining which server is nearest and contains the requested content relies on
+                protocols that govern the internet. Various CDN providers primarily use Anycast Routing or GeoDNS, both
+                of which are integrated into the DNS protocol.
+            </p>
+            <p>
+                The servers spread across the world are <em>Edge servers</em> or <em>POPs (Points of Presence)</em>. The
+                server that actually server the content is called a <em>Origin Server</em>. Each POP contains a cached
+                copy of the content.
+            </p>
+            <p>
+                In some more advanced scenarios, one of the POPs has a special role of being a Shield server. Shield
+                usually stands close to the origin server and is used as a kind of proxy to distribute content to the
+                rest of the POPs network. Since the Shield is the only POP fetching content from the origin, it
+                essentially shields the origin from the flood or requests coming from all POPs in the network.
+            </p>
+            <p>
+                The content is cached in the POPs for a certain period of time, after which it is deleted to make space
+                for new content. The length of the caching time, the parts of the content that should be cached and
+                strategies for caching can be configured in many ways via the UI, HTTP headers being sent by origin or
+                special scripting (such as VCL in Varnish) deployed as part of CDN configuration.
+            </p>
+            <Prism
+                code={`using System;
 
 class Program
 {
@@ -83,8 +100,10 @@ class Program
     {
         Console.WriteLine("Hello World!");
     }
-}`} lang="csharp" />
-        
+}`}
+                lang="csharp"
+            />
+
             <div class="lesson-nav">
                 <a href="#" class="button">Previous</a>
                 <a href="#" class="button">Next</a>
