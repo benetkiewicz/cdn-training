@@ -1,0 +1,125 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import createAccount from "../../../public/lesson2/create-account.png";
+import createService from "../../../public/lesson2/create-service.png";
+---
+
+<style>
+    .image-wrapper {
+        background: #171717;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        overflow-x: hidden;
+        max-width: 100%;
+    }
+
+    /* Lesson specific styles moved from Layout */
+    .lesson-content {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        background: white;
+        padding: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--secondary);
+        width: 100%;
+        overflow-wrap: break-word;
+        word-wrap: break-word;
+        overflow-x: hidden;
+        p,
+        h2 {
+            margin-top: 1rem;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+            margin: 0.75rem 0;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        li p {
+            margin: 0;
+            display: inline;
+        }
+    }
+
+    .lesson-nav {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--secondary);
+    }
+
+    /* Code block styles for lessons */
+    pre,
+    code {
+        max-width: 100%;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-x: auto;
+    }
+</style>
+<Layout>
+    <div class="container">
+        <div class="lesson-content">
+            <h1>Lesson 2: Fastly Caching Setup</h1>
+            
+            <h2>Prerequisites</h2>
+
+            <p>
+                In this lesson we will set up Fastly on top of a website, so we'll be able to start exploring its
+                features and behavior. Two prerequisites are needed to follow this are:
+            </p>
+            <ul>
+                <li>A website to test on (your Origin)</li>
+                <li>Fastly account</li>
+            </ul>
+            <p>
+                Let's pause for a moment and think about the best choice for your origin. You can either use your
+                existing website or create new one using one of many free services available on the internet. Depending
+                on your proficiency in programming, you can choose to work with a static website and still learn a lot
+                but, as this course will dive in to some advanced topics, some control over the website behavior will be
+                needed in order to fully benefit from the course. We'll be using some simple API endpoints to
+                demonstrate the caching behavior and how to control it. We will also want to return some HTTP header
+                from the backend to impact the caching behavior.
+            </p>
+            <p>
+                My stack of choice for this course is Vercel, where I will host Astro application. I will also show code
+                snippets in Node.js + Express.js, which can be hosted on Vercel but also on other services with generic
+                free tiers, like Render.com or https://railway.com/. As long as you feel confident in reading and
+                writing simple http apps/apis, you should really be good in any other stack or language of your choice.
+            </p>
+
+            <h2>Fastly Caching Setup</h2>
+            <p>
+                If you don't have a Fastly account yet, you can sign up for a free trial
+                <a href="https://www.fastly.com/signup">here</a>. Just click on the <em>Create Account</em> button and follow
+                the instructions. The account is free and there is no credit card required.
+            </p>
+            <div class="image-wrapper">
+                <img src={createAccount.src} alt="Create Fastly account" />
+            </div>
+            <p>
+                Once you fill in the registration form and convirm your email address, you'll be able to log in and
+                presented with the main Fastly services panel. We want to start playing with the CDN services, so click
+                <em>Create a CDN Service</em> link.
+            </p>
+            <div class="image-wrapper">
+                <img src={createService.src} alt="Create CDN service" />
+            </div>
+            <div class="lesson-nav">
+                <a href="#" class="button">Previous</a>
+                <a href="#" class="button">Next</a>
+            </div>
+        </div>
+    </div>
+</Layout>
