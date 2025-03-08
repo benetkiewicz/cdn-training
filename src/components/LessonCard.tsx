@@ -1,16 +1,16 @@
 export interface LessonCardProps {
     title: string;
     subtitle: string;
-    link?: string;
+    id: number;
 }
 
-export const LessonCard = ({ title, subtitle, link = "lesson" }: LessonCardProps) => {
+export const LessonCard = ({ title, subtitle, id }: LessonCardProps) => {
     return (
         <div class="lesson-card">
             <h3>{title}</h3>
             <p>{subtitle}</p>
             <br />
-            <a href={link} class="button">
+            <a href={`/lessons/lesson${id}`} class="button">
                 Begin
             </a>
         </div>
