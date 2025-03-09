@@ -33,7 +33,7 @@ import Footer from "../components/Footer.astro";
                 min-height: 100vh;
                 display: flex;
                 flex-direction: column;
-                overflow-x: hidden; /* Prevent horizontal scroll on the body */
+                overflow-x: hidden;
             }
 
             nav {
@@ -44,10 +44,19 @@ import Footer from "../components/Footer.astro";
 
             .nav-container {
                 max-width: var(--max-width);
+                padding-left: 1rem;
+                padding-right: 1rem;
                 margin: 0 auto;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+            }
+
+            @media (max-width: 768px) {
+                .nav-container {
+                    padding-left: 0;
+                    padding-right: 0;
+                }
             }
 
             .nav-logo {
@@ -74,7 +83,7 @@ import Footer from "../components/Footer.astro";
                 margin: 0 auto;
                 padding: 1rem;
                 flex: 1;
-                overflow-x: hidden; /* Prevent horizontal scroll */
+                overflow-x: hidden;
             }
 
             .button {
@@ -93,8 +102,6 @@ import Footer from "../components/Footer.astro";
             .button:hover {
                 opacity: 0.9;
             }
-
-            
 
             footer {
                 background-color: var(--secondary);

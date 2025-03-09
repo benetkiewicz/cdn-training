@@ -12,8 +12,8 @@ import editConfiguration from "../../../public/lesson2/edit-configuration.png";
     <h2>Prerequisites</h2>
 
     <p>
-        In this lesson we will set up Fastly on top of a website, so we'll be able to start exploring its features and
-        behavior. Two prerequisites are needed to follow this are:
+        In this lesson we will set up Fastly on top of a website, so we'll be able to start exploring it's features and
+        behavior. Two prerequisites that are needed to continue are:
     </p>
     <ul>
         <li>A website to test on (your Origin)</li>
@@ -21,31 +21,32 @@ import editConfiguration from "../../../public/lesson2/edit-configuration.png";
     </ul>
     <p>
         Let's pause for a moment and think about the best choice for your origin. You can either use your existing
-        website or create new one using one of many free services available on the internet. Depending on your
-        proficiency in programming, you can choose to work with a static website and still learn a lot but, as this
-        course will dive in to some advanced topics, some control over the website behavior will be needed in order to
-        fully benefit from the course. We'll be using some simple API endpoints to demonstrate the caching behavior and
-        how to control it. We will also want to return some HTTP header from the backend to impact the caching behavior.
+        website if you have one, or create new one using one of many free services available on the internet. Your
+        programming proficiency might influence your choice. You could work with a static website and still learn a lot.
+        However, this course dives into advanced topics, and you'll need some control over your website's behavior to
+        fully benefit from it. We'll be using some simple API endpoints to demonstrate the caching behavior and how to
+        control it. We will also want to return some HTTP headers from the backend to impact the caching behavior.
     </p>
     <p>
         My stack of choice for this course is Vercel, where I will host Astro application. I will also show code
         snippets in Node.js + Express.js, which can be hosted on Vercel but also on other services with generic free
-        tiers, like Render.com or https://railway.com/. As long as you feel confident in reading and writing simple http
-        apps/apis, you should really be good in any other stack or language of your choice.
+        tiers, like <a href="https://render.com">render.com</a> or <a href="https://railway.com">railway.com</a>. As
+        long as you feel confident in reading code and writing simple http apps/apis, you should really be good in any
+        other stack or language of your choice.
     </p>
 
     <h2>Fastly Caching Setup</h2>
     <p>
-        If you don't have a Fastly account yet, you can sign up for a free trial
+        If you don't have a Fastly account yet, you can sign up for a free account
         <a href="https://www.fastly.com/signup">here</a>. Just click on the <em>Create Account</em> button and follow the
-        instructions. The account is free and there is no credit card required.
+        instructions. The account remains free for low traffic and there is no credit card required.
     </p>
     <div class="image-wrapper">
         <img src={createAccount.src} alt="Create Fastly account" />
     </div>
     <p>
-        Once you fill in the registration form and convirm your email address, you'll be able to log in and presented
-        with the main Fastly services panel. We want to start playing with the CDN services, so click
+        Once you fill in the registration form and convirm your email address, you'll be able to log in and will be
+        presented with the main Fastly services panel. We want to start playing with the CDN services, so click
         <em>Create a CDN Service</em> link. You can either skip the simplified form and dive straight into configuration
         details or use the form to fast-forward your setup.
     </p>
@@ -62,30 +63,33 @@ import editConfiguration from "../../../public/lesson2/edit-configuration.png";
     </ul>
     <p>
         In terms of the domain, you don't have to buy and use a new one. For testing purposes, the one that Fastly gives
-        us is perfectly fine. The domain will be prefix.global.ssl.fastly.net, where you get to choose your prefix, so
-        use something meaningful to you. I went with <em>cdn-course</em>.
+        us is perfectly fine. The domain will be <em>prefix.global.ssl.fastly.net</em>, where you get to choose your
+        prefix, so use something meaningful to you. I went with <em>cdn-course</em>.
     </p>
     <p>
         A host is your actual web application that you want to put behind the CDN. Remember the CDN basics from the
-        previous lesson? This is the Origin we're setting up here. Do not put https:// or http:// in the host field. For
-        example, in my case, the app is hosted on Vercel and the URL is cdn-training.vercel.app.
+        previous lesson? This is the <em>Origin</em> we're setting up here. Do not put <em>https://</em> or <em
+            >http://</em
+        > in the host field. For example, in my case, the app is hosted on Vercel and the URL is <em
+            >cdn-training.vercel.app</em
+        >.
     </p>
     <p>
-        The last step is to activate your service. This will make the service start working and start caching content.
-        That's it! You've just created your first CDN service. It should start working in up to a minute. Go to
-        prefix.global.ssl.fastly.net and you should see you app hosted from the cache.
+        The last step is to activate your service. This will make the service start caching content. That's it! You've
+        just created your first CDN service. It should be ready and operational in less than a minute. Go to
+        <em>prefix.global.ssl.fastly.net</em> and you should see your app hosted from the cache.
     </p>
 
     <h2>Initial Testing and Config Adjustments</h2>
     <p>
         Vanilla Fastly setup caches all pages and assets of your website and it does that for the period of one hour. We
         can use that knowledge to test that this is really working. If you have a way to easily change the content on
-        the webpage, the do as follows:
+        the webpage, then do as follows:
     </p>
     <ul>
-        <li>Go to the page under fastly URL, to make sure it is cached.</li>
-        <li>Adjust the content of the page under the origin URL and publish the changes.</li>
-        <li>Verify the changes are visible on the origin.</li>
+        <li>Go to the page under fastly URL, to make sure it is cached</li>
+        <li>Adjust the content of the page under the origin URL and publish the changes</li>
+        <li>Verify the changes are visible on the origin</li>
         <li>
             If you managed to do the above in under an hour, the changes under the fastly URL will not be visible yet.
         </li>
@@ -97,8 +101,8 @@ import editConfiguration from "../../../public/lesson2/edit-configuration.png";
         <li>Add query parameters to the URL, like ?v=1.1.</li>
     </ul>
     <p>
-        To purge the cache manually, you can use the Fastly user interface to do so. Go to your service main page
-        (Service Summary) and find the Purge dropdown. It provides options to purge the specific URL or purge all.
+        To purge the cache manually, you can use the Fastly user interface. Go to your service main page
+        (Service Summary) and find the <em>Purge</em> dropdown. It provides options to purge the specific URL or purge all.
         There's also a third option, purge key, which we will get to in the later part of this course.
     </p>
     <div class="image-wrapper">
@@ -107,7 +111,7 @@ import editConfiguration from "../../../public/lesson2/edit-configuration.png";
     <p>
         Adding query parameter to the URL is also a simple way to force changes to be reflected under the fastly URL.
         You may notice that even though you will see the new content under the URL with query string, the original URL
-        will keep showing the old content. This will become more clear when we discuss cache keys but for now les's just
+        will keep showing the old content. This will become more clear when we discuss cache keys but for now let's just
         say that this is creating a new cache entry, enforcing the round-trip to the origin.
     </p>
 
@@ -116,11 +120,11 @@ import editConfiguration from "../../../public/lesson2/edit-configuration.png";
     <p>
         Fastly has a partical way of dealing with configuration changes. Each setup is a configuration snapshot. When
         you make changes, they are not applied immediately. Instead, they are queued and can be applied by activating
-        your current state of configuration. This becomes your new active configuration, which in turn needs to be
+        your current state of configuration. This becomes your new active configuration, which in turn may be
         cloned, edited and activated, and so on.
     </p>
     <p>
-        Let's have a look at the configuration page of our newly created service. After you click Service Configuration
+        Let's have a look at the configuration page for our newly created service. After you click Service Configuration
         on the main page, you are presented with something that looks like this
     </p>
     <div class="image-wrapper">
