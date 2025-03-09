@@ -61,14 +61,6 @@ import dnsDetails from "../../../public/lesson3/dns-details.png";
         border-top: 1px solid var(--secondary);
     }
 
-    /* Code block styles for lessons */
-    pre,
-    code {
-        max-width: 100%;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        overflow-x: auto;
-    }
 </style>
 <Layout>
     <div class="container">
@@ -157,11 +149,3 @@ import dnsDetails from "../../../public/lesson3/dns-details.png";
         </div>
     </div>
 </Layout>
-
-<!-- Use www. -->
-
-<!-- Before we can do that we need to ensure Fastly that the domain belongs to us. To do that, we need to create a different CNAME record with the answer value equal to the one
-Fastly provides us. -->
-
-<!-- You need to create new CNAME record with the name _acme-challenge.www and value as requested by
-Fastly -->
