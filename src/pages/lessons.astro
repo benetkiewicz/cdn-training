@@ -2,8 +2,8 @@
 import { LessonCard } from "../components/LessonCard";
 import Layout from "../layouts/Layout.astro";
 
-Astro.response.headers.set('Cache-Control', 'no-store, max-age=0');
-Astro.response.headers.set('Surrogate-Control', 'max-age=1800');
+Astro.response.headers.set("Cache-Control", "no-store, max-age=0");
+Astro.response.headers.set("Surrogate-Control", "max-age=1800");
 
 interface Lesson {
     id: number;
@@ -75,7 +75,7 @@ const lessons: Lesson[] = [
 ];
 ---
 
-<style>
+<style is:global>
     .lessons-grid {
         display: flex;
         justify-content: space-between;
