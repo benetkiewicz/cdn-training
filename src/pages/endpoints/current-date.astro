@@ -2,8 +2,7 @@
 return new Response(new Date().toISOString(),
 {
     headers: {
-        "Cache-Control": "no-store, max-age=0",
-        "Surrogate-Control": "max-age=10",
+        "Vercel-CDN-Cache-Control": "no-store, max-age=0"
     },
 });
 ---
