@@ -1,5 +1,9 @@
 ---
-Astro.response.headers.set("Cache-Control", "no-store, max-age=0");
-Astro.response.headers.set("Surrogate-Control", "max-age=10");
-return new Response(new Date().toISOString());
+return new Response(new Date().toISOString(),
+{
+    headers: {
+        "Cache-Control": "no-store, max-age=0",
+        "Surrogate-Control": "max-age=10",
+    },
+});
 ---
