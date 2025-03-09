@@ -1,0 +1,44 @@
+---
+import { getSession } from "auth-astro/server";
+import Layout from "../layouts/Layout.astro";
+
+const session = await getSession(Astro.request);
+---
+
+<Layout title="Profile">
+    <main class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Profile</h1>
+
+        {
+            session ? (
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-semibold mb-2">Welcome, {session.user?.name || "User"}</h2>
+
+                    <div class="mb-4">
+                        <p>
+                            <strong>Email:</strong> {session.user?.email || "Not provided"}
+                        </p>
+                    </div>
+
+                    <a
+                        href="/api/auth/signout"
+                        class="inline-block px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                    >
+                        Sign Out
+                    </a>
+                </div>
+            ) : (
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <p class="mb-4">You need to be signed in to view this page.</p>
+                    <a
+                        href="/api/auth/signin"
+                        class="inline-block px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                    >
+                        Sign In with GitHub
+                    </a>
+                </div>
+            )
+        }
+    </main>
+</Layout>
+

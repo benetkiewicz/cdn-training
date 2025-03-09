@@ -13,7 +13,9 @@
     "@astrojs/preact": "^4.0.4",
     "@astrojs/prism": "^3.2.0",
     "@astrojs/vercel": "^8.0.6",
+    "@auth/core": "^0.37.4",
     "astro": "^5.2.5",
+    "auth-astro": "^4.2.0",
     "preact": "^10.25.4"
   }
 }
