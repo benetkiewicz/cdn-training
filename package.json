@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/db": "^0.14.8",
     "@astrojs/preact": "^4.0.4",
     "@astrojs/prism": "^3.2.0",
     "@astrojs/vercel": "^8.0.6",
