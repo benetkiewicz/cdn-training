@@ -39,9 +39,6 @@ export default defineConfig({
             return true;
         },
         async redirect({ url, baseUrl }) {
-            if (url.startsWith(baseUrl)) {
-                return url;
-            }
             return url.replace("cdn-training.vercel.app", "www.cdn-training.com");
         },
     },
