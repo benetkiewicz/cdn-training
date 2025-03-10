@@ -7,6 +7,11 @@ export default defineConfig({
         GitHub({
             clientId: import.meta.env.AUTH_GITHUB_ID,
             clientSecret: import.meta.env.AUTH_GITHUB_SECRET,
+            authorization: {
+                params: {
+                    redirect_uri: "https://www.cdn-training.com/api/auth/callback/github"
+                }
+            }
         }),
     ],
     trustHost: true,
@@ -37,9 +42,6 @@ export default defineConfig({
     callbacks: {
         async signIn({ user }) {
             return true;
-        },
-        async redirect({ url, baseUrl }) {
-            return url.replace("cdn-training.vercel.app", "www.cdn-training.com");
-        },
+        }
     },
 });
