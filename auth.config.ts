@@ -9,6 +9,7 @@ export default defineConfig({
             clientSecret: import.meta.env.AUTH_GITHUB_SECRET,
         }),
     ],
+    trustHost: true,
     events: {
         async signIn({ user }) {
             if (!user.email) {
@@ -36,6 +37,12 @@ export default defineConfig({
     callbacks: {
         async signIn({ user }) {
             return true;
+        },
+        async redirect({ url, baseUrl }) {
+            if (url.startsWith(baseUrl)) {
+                return url;
+            }
+            return url.replace("cdn-training.vercel.app", "www.cdn-training.com");
         },
     },
 });
