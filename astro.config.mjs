@@ -3,15 +3,21 @@ import { defineConfig } from 'astro/config';
 
 import preact from '@astrojs/preact';
 
-import vercel from '@astrojs/vercel';
-
 import auth from 'auth-astro';
 
 import db from '@astrojs/db';
+
+import node from '@astrojs/node';
 
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
   integrations: [preact(), auth(), db()],
-  adapter: vercel()
+
+  adapter: node({
+    mode: 'standalone',
+  }),
+  server: {
+    host: '0.0.0.0',
+  },
 });
