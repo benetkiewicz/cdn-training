@@ -9,8 +9,6 @@ export default defineConfig({
             clientSecret: import.meta.env.AUTH_GITHUB_SECRET,
         }),
     ],
-    basePath: "/api/auth",
-    trustHost: true,
     events: {
         async signIn({ user }) {
             if (!user.email) {
