@@ -3,14 +3,17 @@ import { getSession } from "auth-astro/server";
 
 const session = await getSession(Astro.request);
 ---
-
+<script>
+    const { signIn } = await import("auth-astro/client")
+    document.querySelector("#sign-in-button")?.addEventListener("click", () => signIn("github"))
+</script>
 <nav>
     <div class="nav-container">
         <a href="/" class="nav-logo">Learn CDN</a>
         <div class="nav-links">
             <a href="/">Home</a>
             <a href="/lessons">Lessons</a>
-            {session ? <a href="/profile">Profile</a> : <a href="/api/auth/signin">Sign In</a>}
+            {session ? <a href="/profile">Profile</a> : <a id="sign-in-button" href="#">Sign In</a>}
         </div>
     </div>
 </nav>
