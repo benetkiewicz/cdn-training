@@ -74,14 +74,15 @@ import CodeBlock from "../../components/CodeBlock.astro";
     <p>
         The main goal of this course is deep understanding how POPs and Origin cooperate with each other. We'll be
         adjusting CDN configuration via Fastly UI and varnish code snippets but you must also know that backend can have
-        a big impact on how caching works. Due to that, we'll be implementing a simple backend endpoints that will allow us to
-        demonstrate all the concepts we'll cover in this course.
+        a big impact on how caching works. Due to that, we'll be implementing a simple backend endpoints and returning
+        some HTTP headers from the backend that will allow us to demonstrate all the concepts we'll cover in this
+        course.
     </p>
     <p>
-        You could work with a static website and still learn a lot. However, you'll need some control over your
-        website's behavior to fully benefit from it. We'll be using some simple API endpoints to demonstrate the caching
-        behavior and how to control it. We will also want to return some HTTP headers from the backend to impact the
-        caching behavior. As long as you understand any the following code snippets, you should be good to go.
+        My stack of choice is nodejs and express.js. However, you can use any other backend you want. This is not a
+        programming course, so code snippets will be extremely simple and should be easy to translate into different
+        proraming languages and their frameworks. As long as you understand any the following code snippets, you should
+        be good to go.
     </p>
     <CodeBlock
         code={`using Microsoft.AspNetCore.Builder;
@@ -108,4 +109,10 @@ server.listen(3000, () => {
 });`}
         lang="javascript"
     />
+    <p>
+        Please also be aware that some of the service support their own CDN/edge network, which means that you will
+        experience some caching by default. These features may stack on top of Fastly's caching and some of the concepts
+        may not work as described in this course. Azure App Services provide "vanilla" hosting, which is perfect for
+        this course.
+    </p>
 </LessonLayout>

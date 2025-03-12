@@ -1,0 +1,49 @@
+---
+import LessonLayout from "../../layouts/LessonLayout.astro";
+import { URLS } from "../../data/urls";
+import CodeBlock from "../../components/CodeBlock.astro";
+---
+
+<LessonLayout>
+    <h1>Lesson 4: Important Things to Know About Caching</h1>
+    <p>
+        Let's summarize what we know about Fastly caching in context of resources at our disposal and let's start
+        playing with them to understand how it all works.
+    </p>
+    <p>We have:</p>
+    <ul>
+        <li>
+            Origin - our backend server: <a href={`https://${URLS.origin}`}>{URLS.origin}</a>
+            <ul>
+                <li>
+                    It has some API endpoints implemented, one of which is <a
+                        href={`https://${URLS.origin}/api/getdate`}>/api/getdate</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            Fastly service - a network of POPs (Point of Presence) that caches resources from our Origin: <a
+                href={`https://${URLS.fastly}`}>{URLS.fastly}</a
+            >
+        </li>
+    </ul>
+    <h2>Cache Key</h2>
+
+    <p>
+        Running:
+        <CodeBlock lang="powershell" code=`curl -X GET https://${URLS.origin}/api/getdate` />
+        will return (surprise, surprise): curent date and time. Subsequent requests will return the new date and time.
+    </p>
+    <p>
+        But runing:
+        <CodeBlock lang="powershell" code=`curl -X GET https://${URLS.fastly}/api/getdate` />
+        multiple times will return the same date and time. You need to wait exactly 1h since the first request to see that
+        value changed.
+    </p>
+    <p>
+        Interestingly, running:
+        <CodeBlock lang="powershell" code=`curl -X GET https://${URLS.fastly}/api/getdate?foo=bar` />
+        will return fress date and time in the first response but subsequent requests will again return the same date and
+        time as before.
+    </p>
+</LessonLayout>

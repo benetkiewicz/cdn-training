@@ -1,5 +1,6 @@
 ---
 import LessonLayout from "../../layouts/LessonLayout.astro";
+import { URLS } from "../../data/urls";
 import createAccount from "../../../public/lesson2/create-account.png";
 import createService from "../../../public/lesson2/create-service.png";
 import purgeCache from "../../../public/lesson2/purge-cache.png";
@@ -22,10 +23,10 @@ import editConfiguration from "../../../public/lesson2/edit-configuration.png";
 
     <p>
         In the Lesson 1 we discussed the importance of backend choice. This is where this decision needs to be made. Use
-        whatever language and platform you feel comfortable with. I'll be using this and I will also provide code
-        snippets in that. There are plenty of services with generous free plans which will be more than enough to test
-        and learn. To name a few: <a href="https://vercel.com">Vercel</a>, <a href="https://render.com">render.com</a> or <a href="https://railway.com"
-            >railway.app</a>.
+        whatever language and platform you feel comfortable with. I'll be using node and express.js app, hosted here: <a
+            href={`http://${URLS.origin}`}
+            >{URLS.origin}</a
+        >
     </p>
 
     <h2>Fastly Caching Setup</h2>
