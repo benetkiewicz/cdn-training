@@ -9,7 +9,7 @@ export const LessonCard = ({ title, subtitle, id }: LessonCardProps) => {
         <div class="lesson-card">
             <h3>{title}</h3>
             <p>{subtitle}</p>
-            <br />
+            <p>&nbsp;</p>
             <a href={`/lessons/lesson${id}`} class="button">
                 Begin
             </a>
