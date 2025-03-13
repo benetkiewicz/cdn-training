@@ -31,18 +31,18 @@ import CodeBlock from "../../components/CodeBlock.astro";
 
     <p>
         Running:
-        <CodeBlock lang="powershell" code=`curl -X GET https://${URLS.origin}/api/getdate` />
+        <CodeBlock lang="powershell" code={`curl -X GET https://${URLS.origin}/api/getdate`} />
         will return (surprise, surprise): curent date and time. Subsequent requests will return the new date and time.
     </p>
     <p>
         But runing:
-        <CodeBlock lang="powershell" code=`curl -X GET https://${URLS.fastly}/api/getdate` />
+        <CodeBlock lang="powershell" code={`curl -X GET https://${URLS.fastly}/api/getdate`} />
         multiple times will return the same date and time. You need to wait exactly 1h since the first request to see that
         value changed.
     </p>
     <p>
         Interestingly, running:
-        <CodeBlock lang="powershell" code=`curl -X GET https://${URLS.fastly}/api/getdate?foo=bar` />
+        <CodeBlock lang="powershell" code={`curl -X GET https://${URLS.fastly}/api/getdate?foo=bar`} />
         will return fress date and time in the first response but subsequent requests will again return the same date and
         time as before.
     </p>
