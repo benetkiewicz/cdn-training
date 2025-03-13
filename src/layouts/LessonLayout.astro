@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 ---
+
 <Layout>
     <style is:global slot="head">
         .image-wrapper {
@@ -13,41 +14,36 @@ import Layout from "../layouts/Layout.astro";
             overflow-x: hidden;
             max-width: 100%;
         }
-    
         .lesson-content {
             max-width: var(--max-width);
             margin: 0 auto;
-            background: white;
+            background: #fff;
             padding: 1rem;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px #0000001a;
             border: 1px solid var(--secondary);
             width: 100%;
             overflow-wrap: break-word;
             word-wrap: break-word;
             overflow-x: hidden;
-            p,
-            h2 {
-                margin-top: 1rem;
-            }
-    
-            ul {
-                padding-left: 1.5rem;
-                margin: 0.75rem 0;
-            }
-    
-            li {
-                margin-bottom: 0.5rem;
-                line-height: 1.5;
-                position: relative;
-            }
-    
-            li p {
-                margin: 0;
-                display: inline;
-            }
         }
-    
+        .lesson-content p,
+        .lesson-content h2 {
+            margin-top: 1rem;
+        }
+        .lesson-content ul {
+            padding-left: 1.5rem;
+            margin: 0.75rem 0;
+        }
+        .lesson-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+            position: relative;
+        }
+        .lesson-content li p {
+            margin: 0;
+            display: inline;
+        }
         .lesson-nav {
             display: flex;
             justify-content: space-between;
