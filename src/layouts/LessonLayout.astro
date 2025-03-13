@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
+    <link href="/prism-material-light.css" rel="stylesheet" slot="head" />
     <style is:global slot="head">
         .image-wrapper {
             background: #171717;
@@ -50,6 +51,19 @@ import Layout from "../layouts/Layout.astro";
             margin-top: 2rem;
             padding-top: 1rem;
             border-top: 1px solid var(--secondary);
+        }
+        .code-block-wrapper {
+            margin: 0.5rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        pre,
+        code {
+            max-width: 100%;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            overflow-x: auto;
         }
     </style>
     <div class="container">

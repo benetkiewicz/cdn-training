@@ -8,23 +8,6 @@ interface Props {
 
 const { code, lang } = Astro.props;
 ---
-<style>
-  .code-block-wrapper {
-    margin: 0.5rem 0;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-  
-  pre,
-  code {
-    max-width: 100%;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-    overflow-x: auto;
-  }
-</style>
-<link href="/prism-material-light.css" rel="stylesheet" />
-
 <div class="code-block-wrapper">
   <Prism code={code} lang={lang} />
 </div>
