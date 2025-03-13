@@ -29,21 +29,20 @@ import CodeBlock from "../../components/CodeBlock.astro";
     </ul>
     <h2>Cache Key</h2>
 
-    <p>
-        Running:
+    <p>Running:</p>
         <CodeBlock lang="powershell" code={`curl -X GET https://${URLS.origin}/api/getdate`} />
-        will return (surprise, surprise): curent date and time. Subsequent requests will return the new date and time.
+        <p>will return (surprise, surprise): curent date and time. Subsequent requests will return the new date and time.
     </p>
     <p>
-        But runing:
+        But runing:</p>
         <CodeBlock lang="powershell" code={`curl -X GET https://${URLS.fastly}/api/getdate`} />
-        multiple times will return the same date and time. You need to wait exactly 1h since the first request to see that
+        <p>multiple times will return the same date and time. You need to wait exactly 1h since the first request to see that
         value changed.
     </p>
     <p>
-        Interestingly, running:
+        Interestingly, running:</p>
         <CodeBlock lang="powershell" code={`curl -X GET https://${URLS.fastly}/api/getdate?foo=bar`} />
-        will return fress date and time in the first response but subsequent requests will again return the same date and
+        <p>will return fress date and time in the first response but subsequent requests will again return the same date and
         time as before.
     </p>
 </LessonLayout>
