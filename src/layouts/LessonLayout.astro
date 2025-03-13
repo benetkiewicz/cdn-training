@@ -64,6 +64,29 @@ import Layout from "../layouts/Layout.astro";
             white-space: pre-wrap;
             word-wrap: break-word;
             overflow-x: auto;
+            padding: 1rem;
+        }
+        
+        blockquote {
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--secondary);
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: #555;
+        }
+        
+        blockquote p {
+            margin: 0.5rem 0;
+        }
+        
+        blockquote cite {
+            display: block;
+            font-size: 0.9em;
+            margin-top: 0.75rem;
+            font-style: normal;
+            opacity: 0.8;
         }
     </style>
     <div class="container">

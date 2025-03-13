@@ -13,5 +13,10 @@ import db from '@astrojs/db';
 export default defineConfig({
   output: 'server',
   integrations: [preact(), auth(), db()],
-  adapter: vercel()
+  adapter: vercel(),
+  markdown: {
+    shikiConfig: {
+      theme: 'one-light',
+    },
+  },
 });
