@@ -2,7 +2,9 @@
 import { getCollection } from "astro:content";
 import { LessonCard } from "../components/LessonCard";
 import Layout from "../layouts/Layout.astro";
+import { getSession } from "auth-astro/server";
 const allLessons = await getCollection("lessons");
+const session = await getSession(Astro.request);
 ---
 
 <style is:global>
@@ -20,6 +22,7 @@ const allLessons = await getCollection("lessons");
         border-radius: 0.5rem;
         padding: 1rem;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        position: relative;
     }
 
     .lesson-card:hover {
@@ -33,6 +36,22 @@ const allLessons = await getCollection("lessons");
 
     .lesson-card p {
         color: var(--text-light);
+    }
+
+    .premium-badge {
+        position: absolute;
+        top: -0.5rem;
+        right: -0.5rem;
+        color: white;
+        padding: 0.4rem 0.4rem 0.7rem 0.4rem;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     @media (max-width: 768px) {
@@ -51,7 +70,7 @@ const allLessons = await getCollection("lessons");
         {
             allLessons
                 .sort((a, b) => a.id.localeCompare(b.id))
-                .map(lesson => <LessonCard title={lesson.data.title} subtitle={lesson.data.subtitle} id={lesson.id} />)
+                .map(lesson => <LessonCard isAccessGranted={session !== null || !lesson.data.premium} title={lesson.data.title} subtitle={lesson.data.subtitle} id={lesson.id} />)
         }
     </div>
 </Layout>

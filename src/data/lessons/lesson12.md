@@ -1,6 +1,7 @@
 ---
 title: Terraforming Fastly
 subtitle: Configuration management with Terraform
+premium: true
 ---
 
 ## Placeholder Content

@@ -1,6 +1,7 @@
 ---
 title: Advanced Varnish
 subtitle: Using ACLs, Edge dictionary and client API
+premium: true
 ---
 
 ## Placeholder Content

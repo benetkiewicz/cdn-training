@@ -1,0 +1,133 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<style>
+    .hero {
+        background-color: var(--secondary);
+        padding: 4rem 0;
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--text);
+    }
+
+    .hero p {
+        font-size: 1.2rem;
+        max-width: 600px;
+        margin: 0 auto;
+        color: var(--text-light);
+    }
+
+    .benefits {
+        padding: 4rem 0;
+        background: white;
+    }
+
+    .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .benefit-card {
+        background: var(--secondary);
+        padding: 2rem;
+        border-radius: 8px;
+        text-align: center;
+        transition: transform 0.2s;
+    }
+
+    .benefit-card:hover {
+        transform: translateY(-4px);
+    }
+
+    .benefit-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .benefit-card h3 {
+        color: var(--primary);
+        margin-bottom: 1rem;
+    }
+
+    .benefit-card p {
+        color: var(--text-light);
+    }
+
+    .cta-section {
+        background: var(--primary);
+        padding: 3rem 0;
+        text-align: center;
+        color: white;
+    }
+
+    .cta-section h2 {
+        margin-bottom: 2rem;
+        font-size: 2rem;
+    }
+
+    .sign-in-button {
+        display: inline-block;
+        background: white;
+        color: var(--primary);
+        padding: 1rem 2rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 1.1rem;
+        transition: transform 0.2s;
+    }
+
+    .sign-in-button:hover {
+        transform: translateY(-2px);
+    }
+</style>
+
+<Layout>
+    <div class="hero">
+        <div class="container">
+            <h1>Premium Content Awaits</h1>
+            <p>We're glad you're enjoying the free content! Sign in to unlock all premium features and take your CDN knowledge to the next level.</p>
+        </div>
+    </div>
+
+    <section class="benefits">
+        <div class="container">
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">📚</div>
+                    <h3>Lifetime Access</h3>
+                    <p>Get unlimited access to all current and future premium content</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">📱</div>
+                    <h3>Offline Learning</h3>
+                    <p>Download the complete ebook version for offline reading</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">👨‍🏫</div>
+                    <h3>Direct Support</h3>
+                    <p>Get answers directly from the author via private Discord channel</p>
+                </div>
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎓</div>
+                    <h3>Certificate</h3>
+                    <p>Receive a completion certificate to showcase your expertise</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to unlock everything?</h2>
+            <a href="/api/auth/signin" class="sign-in-button">Sign In</a>
+        </div>
+    </section>
+</Layout> 

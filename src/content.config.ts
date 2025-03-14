@@ -6,6 +6,7 @@ const lessons = defineCollection({
   schema: z.object({
     title: z.string(),
     subtitle: z.string(),
+    premium: z.boolean().default(false),
   }),
 });
 

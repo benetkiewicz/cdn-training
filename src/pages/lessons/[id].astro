@@ -1,6 +1,7 @@
 ---
 import { getEntry, render } from "astro:content";
 import LessonLayout from "../../layouts/LessonLayout.astro";
+import { getSession } from "auth-astro/server";
 
 const { id } = Astro.params;
 if (id === undefined) {
@@ -12,6 +13,12 @@ if (post === undefined) {
     return new Response("Not found", { status: 404 });
 }
 
+if (post.data.premium) {
+    const session = await getSession(Astro.request);
+    if (session === null) {
+        return Astro.redirect("/premium");
+    }
+} 
 const { Content } = await render(post);
 ---
 
