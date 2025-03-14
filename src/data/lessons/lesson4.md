@@ -18,6 +18,7 @@ curl -X GET https://cdn-training-acc5b8byapdregby.westeurope-01.azurewebsites.ne
 will return (surprise, surprise): curent date and time. Subsequent requests will return the new date and time.
 
 But runing:
+
 ```powershell
 curl -X GET https://cdn-training.global.ssl.fastly.net/api/getdate
 ```
@@ -36,12 +37,14 @@ This hints us the the first important information:
 
 Let's have a look at some response headers from Fastly endpoint:
 ```powershell
+
 curl -v https://cdn-training.global.ssl.fastly.net/api/getdate?bar=baz
 < Age: 0
 < X-Cache: MISS
 ```
 Let's hit it again:
 ```powershell
+
 curl -v https://cdn-training.global.ssl.fastly.net/api/getdate?bar=baz
 < Age: 19
 < X-Cache: HIT
@@ -73,4 +76,4 @@ The first user who happened to access your website just after the homepage cache
 
 Let's consider yet another scenario, where your application implements adaptive frontend. This means that there's completely different UI for desktop and for mobile browsers. Similar to previous case, you obviously need to split cache or you would end up with mobile of desktop frontend cached (depending on which device made the first request). The naive solution would be to split by User-Agent. That would do the trick but you would end up with at least as many cache entries ad in the UTM scenario - there's plaetheora of user agent strings per browser/os/version/etc. 
 
-To solve that issue you want to introduce the middle step, where you take the User-Agent header and put it in a bucket, using for example regular expressions. You want to have a piece of code that will take user agent string as an input and will return one of two values: desktop or mobile as an output. Than you vary-by that value. Please note that this is a bit more advanced stuff but we'll get there, we just need to understand how Fastly processes requests and how we can plug into that pipeline. Please also note that this is a common scenario and Fastly itroduces some API which enable you to get some pretty advanced metadata about each request, like [https://www.fastly.com/documentation/reference/vcl/variables/client-request/client-platform-mobile/](client variable). We'll learn how to use it soon.
+To solve that issue you want to introduce the middle step, where you take the User-Agent header and put it in a bucket, using for example regular expressions. You want to have a piece of code that will take user agent string as an input and will return one of two values: desktop or mobile as an output. Than you vary-by that value. Please note that this is a bit more advanced stuff but we'll get there, we just need to understand how Fastly processes requests and how we can plug into that pipeline. Please also note that this is a common scenario and Fastly itroduces some API which enable you to get some pretty advanced metadata about each request, like [client variable](https://www.fastly.com/documentation/reference/vcl/variables/client-request/client-platform-mobile/). We'll learn how to use it soon.
