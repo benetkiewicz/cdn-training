@@ -58,13 +58,15 @@ You see what's going on? First request for the given cache key obviously means t
 Let's imagine that you promote your website with some marketing email and you track how it goes using UTM attributes. You run two campaigns, track various sources, even track search terms in UTM attributes. That means that you can expect (hopefully) a lot of requests to your homepage but you still don't observe the promised performance gain (at least not at the level it was advertised). Why is that?
 
 UTMs are query string parameters that generate a lot of variations of the full shape of URL. Consider 2 campaigns times few sources, times a lot of search terms:
-- https://domain.com?utm_source=newsletter&utm_medium=email&utm_campaign=spring_sale_2025&utm_content=cta_button
-- https://domain.com?utm_source=facebook&utm_medium=social&utm_campaign=spring_sale_2025&utm_content=carousel_ad
-- https://domain.com?utm_source=google&utm_medium=cpc&utm_campaign=spring_sale_2025&utm_term=discount+coupon
-- https://domain.com?utm_source=affiliate_partner&utm_medium=affiliate&utm_campaign=spring_sale_2025&utm_content=blog_post
+```
 
+https://domain.com?utm_source=newsletter&utm_medium=email&utm_campaign=spring_sale_2025&utm_content=cta_button
+https://domain.com?utm_source=facebook&utm_medium=social&utm_campaign=spring_sale_2025&utm_content=carousel_ad
+https://domain.com?utm_source=google&utm_medium=cpc&utm_campaign=spring_sale_2025&utm_term=discount+coupon
+https://domain.com?utm_source=affiliate_partner&utm_medium=affiliate&utm_campaign=spring_sale_2025&utm_content=blog_post
+```
 
-The result value is the number of separate cache entries created for essentially the same content - your homepage that does not change based on the query string params.
+The result value is the number of separate cache entries created for essentially the same content - your homepage that does not change based on the query string params. This is where you would want to hint CDN that all query string parameters should be disregarded. The process of merging different cache keys into one or putting multiple granular values into more general buckets is called normalization.
 
 ## Vary By
 
