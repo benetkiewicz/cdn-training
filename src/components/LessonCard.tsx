@@ -1,7 +1,7 @@
 export interface LessonCardProps {
     title: string;
     subtitle: string;
-    id: number;
+    id: string;
 }
 
 export const LessonCard = ({ title, subtitle, id }: LessonCardProps) => {
@@ -10,7 +10,7 @@ export const LessonCard = ({ title, subtitle, id }: LessonCardProps) => {
             <h3>{title}</h3>
             <p>{subtitle}</p>
             <p>&nbsp;</p>
-            <a href={`/lessons/lesson${id}`} class="button">
+            <a href={`/lessons/${id}`} class="button">
                 Begin
             </a>
         </div>

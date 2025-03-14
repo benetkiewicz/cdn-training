@@ -1,77 +1,8 @@
 ---
+import { getCollection } from "astro:content";
 import { LessonCard } from "../components/LessonCard";
 import Layout from "../layouts/Layout.astro";
-
-Astro.response.headers.set("Cache-Control", "public, max-age=3600");
-
-interface Lesson {
-    id: number;
-    title: string;
-    subtitle: string;
-}
-
-const lessons: Lesson[] = [
-    {
-        id: 1,
-        title: "1. Introduction to CDNs and Course Kickoff",
-        subtitle: "Understanding the basics of Content Delivery Networks and their importance",
-    },
-    {
-        id: 2,
-        title: "2. Fastly Caching Setup",
-        subtitle: "Step by step guide on how to put Fastly in front of your website",
-    },
-    {
-        id: 3,
-        title: "3. Custom Domain and SSL Setup",
-        subtitle: "How to setup a custom domain and SSL certificate for your website in Fastly",
-    },
-    {
-        id: 4,
-        title: "4. Important Things to Know About Caching",
-        subtitle: "What is cache key, how and why to use vary-by and why normalization is important",
-    },
-    {
-        id: 5,
-        title: "5. Various Adjustments to Cache Settings part 1",
-        subtitle: "How to change caching policy using Fastly UI and HTTP headers",
-    },
-    {
-        id: 6,
-        title: "6. Introduction to Varnish",
-        subtitle: "How abstraction over request/response cycle works in Varnish",
-    },
-    {
-        id: 7,
-        title: "7. Various Adjustments to Cache Settings part 2",
-        subtitle: "How to change caching policy using Varnish",
-    },
-    {
-        id: 8,
-        title: "8. Advanced Varnish",
-        subtitle: "Using ACLs, Edge dictionary and client API",
-    },
-    {
-        id: 9,
-        title: "9. Traffic Filtering",
-        subtitle: "How to filter traffic based on different criteria",
-    },
-    {
-        id: 10,
-        title: "10. Combining Multiple Backends into One Website",
-        subtitle: "How to stitch backends together, seemlessly migrate tech stacks and other magic",
-    },
-    {
-        id: 11,
-        title: "11. Edge Side Includes",
-        subtitle: "How to build dynamic content using components with individual TTLs",
-    },
-    {
-        id: 12,
-        title: "12. Terraforming Fastly",
-        subtitle: "Configuration management with Terraform",
-    },
-];
+const allLessons = await getCollection("lessons");
 ---
 
 <style is:global>
@@ -84,7 +15,7 @@ const lessons: Lesson[] = [
     }
 
     .lesson-card {
-        max-width: 30%;
+        width: 30%;
         background: white;
         border-radius: 0.5rem;
         padding: 1rem;
@@ -117,6 +48,10 @@ const lessons: Lesson[] = [
 </style>
 <Layout>
     <div class="container lessons-grid">
-        {lessons.map(lesson => <LessonCard title={lesson.title} subtitle={lesson.subtitle} id={lesson.id} />)}
+        {
+            allLessons
+                .sort((a, b) => a.id.localeCompare(b.id))
+                .map(lesson => <LessonCard title={lesson.data.title} subtitle={lesson.data.subtitle} id={lesson.id} />)
+        }
     </div>
 </Layout>

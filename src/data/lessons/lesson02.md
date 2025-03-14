@@ -1,4 +1,7 @@
-# Lesson 2: Fastly Caching Setup
+---
+title: Fastly Caching Setup
+subtitle: Step by step guide on how to put Fastly in front of your website
+---
 
 ## Prerequisites
 

@@ -1,4 +1,7 @@
-# Lesson 3: Custom Domain and SSL Setup
+---
+title: Custom Domain and SSL Setup
+subtitle: How to setup a custom domain and SSL certificate for your website in Fastly
+---
 
 In the previous lesson we configured our Fastly service for basic operations. Part of the initial setup was to create a default, free Fastly domain: prefix.global.ssl.fastly.net. This is perfectly fine for initial testing but you may need to use your own domain for public or production use. In this lesson we will see how to set it up.
 

@@ -1,4 +1,7 @@
-# Lesson 4: Important Things to Know About Caching
+---
+title: Important Things to Know About Caching
+subtitle: What is cache key, how and why to use vary-by and why normalization is important
+---
 
 Let's summarize what we know about Fastly caching in context of resources at our disposal and let's start
 playing with them to understand how it all works.

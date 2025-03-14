@@ -1,4 +1,7 @@
-# Lesson 1: Introduction to CDNs
+---
+title: Introduction to CDNs
+subtitle: Understanding the basics of Content Delivery Networks and their importance
+---
 
 ## Basic Idea
 

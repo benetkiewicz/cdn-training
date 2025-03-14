@@ -1,0 +1,21 @@
+---
+import { getEntry, render } from "astro:content";
+import LessonLayout from "../../layouts/LessonLayout.astro";
+
+const { id } = Astro.params;
+if (id === undefined) {
+    return new Response("Not found", { status: 404 });
+}
+
+const post = await getEntry("lessons", id);
+if (post === undefined) {
+    return new Response("Not found", { status: 404 });
+}
+
+const { Content } = await render(post);
+---
+
+<LessonLayout>
+    <h1>{post.data.title}</h1>
+    <Content />
+</LessonLayout>
