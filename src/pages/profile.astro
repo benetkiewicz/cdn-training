@@ -5,29 +5,79 @@ import Layout from "../layouts/Layout.astro";
 const session = await getSession(Astro.request);
 ---
 
-<Layout title="Profile">
+<Layout>
     <main class="container">
         <h1>Profile</h1>
 
         {
             session ? (
-                <div>
+                <div class="profile-container">
                     <h2>Welcome, {session.user?.name || "User"}</h2>
 
-                    <div>
-                        <p>
-                            <strong>Email:</strong> {session.user?.email || "Not provided"}
-                        </p>
+                    <div class="profile-info">
+                        <div class="info-row">
+                            <span class="label">Email</span>
+                            <span>{session.user?.email || "Not provided"}</span>
+                        </div>
                     </div>
 
-                    <a href="/api/auth/signout">Sign Out</a>
+                    <a href="/api/auth/signout" class="btn-signout">Sign Out</a>
                 </div>
             ) : (
-                <div>
+                <div class="auth-prompt">
                     <p>You need to be signed in to view this page.</p>
-                    <a href="/api/auth/signin">Sign In with GitHub</a>
+                    <a href="/api/auth/signin" class="btn-signin">Sign In with GitHub</a>
                 </div>
             )
         }
     </main>
 </Layout>
+
+<style slot="head">
+    .profile-container {
+        max-width: 600px;
+        margin: 2rem auto;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-info {
+        margin: 2rem 0;
+    }
+
+    .info-row {
+        display: flex;
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #eee;
+    }
+
+    .label {
+        font-weight: 600;
+        width: 120px;
+    }
+
+    .btn-signout, .btn-signin {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background-color 0.2s;
+    }
+
+    .btn-signout {
+        background-color: #ef4444;
+        color: white;
+    }
+
+    .btn-signin {
+        background-color: #2563eb;
+        color: white;
+    }
+
+    .auth-prompt {
+        text-align: center;
+        margin: 3rem 0;
+    }
+</style>
