@@ -71,7 +71,7 @@ for ($i = 1; $i -le 15; $i++) {
 ### Hints about making changes in Fastly UI
 I encourage you to use the version comment field. It works simiar to git commit message in version control. It appears on the list of previous versions, it is also part of current configuration and the diff between previous and current one. It helps you to maintain and clear history of changes.
 
-![Attched](../../../public/lesson5/comment.png)
+![Attached](../../../public/lesson5/comment.png)
 
 From my experience though, managing Fastly via UI works only for small projects and not very advanced setups. It can easily go out of control, especially when you manage test/qa and production environment, since all of developed changes need to be manually propagated from lower to higher environment. This is extremely error prone and quickly causes differences between your qa and prod environment, making testing process unreliable. The solution is to have entire Fastly setup mantained as a code in source control using terraform, which we'll learn in due time.
 
