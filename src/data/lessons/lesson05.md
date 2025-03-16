@@ -36,7 +36,7 @@ Let's not attach any condition yet, since we don't have one, and click *Create*
 It is time to create the new condition, to do that navigate to *Conditions* in the left hand side menu. The condition management looks very similar to cache settings management, so let's just click *Create your first condition*. We need to provide:
 * **Name**
 * **Type** - one of Request, Response, Cache
-* **Apply if…** - a snippet of Varnish code that will be our conditional evaluated on each request, essentially the logic of our condition
+* **Apply if…** - a snippet of VCL code that will be our conditional evaluated on each request, essentially the logic of our condition
 
 Obviously we want to create a cache condition, We want to identify some particular requests that match our condition and apply the cache settings to them. Request and response conditions are something else and will also become more obvious after we learn how Fastly request pipeline works. You also need to put the following snippet of code into the *Apply if…* form field:
 ```varnish

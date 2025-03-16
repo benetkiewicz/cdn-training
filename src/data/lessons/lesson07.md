@@ -1,6 +1,6 @@
 ---
 title: Various Adjustments to Cache Settings part 2
-subtitle: How to change caching policy using Varnish
+subtitle: How to change caching policy using VCL
 premium: true
 ---
 

@@ -15,7 +15,7 @@ The servers spread across the world are *Edge servers* or *POPs (Points of Prese
 
 In some more advanced scenarios, one of the POPs has a special role of being a *Shield* server. Shield usually stands close to the origin server and is used as a kind of proxy to distribute content to the rest of the POPs network. Since the Shield is the only POP fetching content from the origin, it essentially shields the origin from the flood or requests coming from all POPs in the network.
 
-The content is cached in the POPs for a certain period of time, after which it is deleted to make space for new content. The length of the caching time, the parts of the content that should be cached and strategies for caching can be configured in many ways via the UI, HTTP headers being sent by origin or special scripting (such as VCL in Varnish) deployed as part of CDN configuration.
+The content is cached in the POPs for a certain period of time, after which it is deleted to make space for new content. The length of the caching time, the parts of the content that should be cached and strategies for caching can be configured in many ways via the UI, HTTP headers being sent by origin or special scripting (such as VCL) deployed as part of CDN configuration.
 
 ## Other features of CDNs
 
@@ -34,7 +34,7 @@ There are a lot of competitors in this field: Akamai, Cloudflare, Cloudfront, et
 
 ## Choice of Backend
 
-The main goal of this course is deep understanding how POPs and Origin cooperate with each other. We'll be adjusting CDN configuration via Fastly UI and varnish code snippets but you must also know that backend can have a big impact on how caching works. Due to that, we'll be implementing a simple backend endpoints and returning some HTTP headers from the backend that will allow us to demonstrate all the concepts we'll cover in this course.
+The main goal of this course is deep understanding how POPs and Origin cooperate with each other. We'll be adjusting CDN configuration via Fastly UI and VCL code snippets but you must also know that backend can have a big impact on how caching works. Due to that, we'll be implementing a simple backend endpoints and returning some HTTP headers from the backend that will allow us to demonstrate all the concepts we'll cover in this course.
 
 My stack of choice is nodejs and express.js. However, you can use any other backend you want. This is not a programming course, so code snippets will be extremely simple and should be easy to translate into different proraming languages and their frameworks. As long as you understand any the following code snippets, you should be good to go.
 
