@@ -18,11 +18,18 @@ if (post.data.premium) {
     if (session === null) {
         return Astro.redirect("/premium");
     }
-} 
+}
 const { Content } = await render(post);
+const displayCoffeeLink = post.data.premium ? 'block' : 'none';
 ---
 
 <LessonLayout>
     <h1>{post.data.title}</h1>
     <Content />
+
+    {post.data.premium && (
+        <a href="https://buycoffee.to/cdn-training" rel="nofollow" class="coffee-link">
+            Like premium content? <img src="/coffee.png" alt="Coffee" width="20" height="20" /> Buy me a coffee
+        </a>
+    )}
 </LessonLayout>

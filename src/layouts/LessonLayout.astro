@@ -44,14 +44,7 @@ import Layout from "../layouts/Layout.astro";
             margin: 0;
             display: inline;
         }
-        .lesson-nav {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--secondary);
-        }
-
+        
         pre,
         code {
             max-width: 100%;
@@ -82,14 +75,28 @@ import Layout from "../layouts/Layout.astro";
             font-style: normal;
             opacity: 0.8;
         }
+
+        .coffee-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 2rem auto 0;
+            padding: 0.75rem;
+            border-radius: 6px;
+            background: #f8f9fa;
+            width: fit-content;
+            text-decoration: none;
+            color: inherit;
+            transition: background-color 0.2s;
+        }
+        
+        .coffee-link:hover {
+            background: #e9ecef;
+        }
     </style>
     <div class="container">
         <div class="lesson-content">
             <slot />
-            <div class="lesson-nav">
-                <a href="#" class="button">Previous</a>
-                <a href="#" class="button">Next</a>
-            </div>
         </div>
     </div>
 </Layout>
