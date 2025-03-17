@@ -4,11 +4,11 @@ subtitle: How abstraction over request/response cycle works in Fastly
 premium: true
 ---
 
-To understand how Fastly processes requests you need to have a full understanding of how regular HTTP communication works, what are request and response headers. We'll build on top of that.
+To understand how Fastly processes requests, you need to fully understand regular HTTP communication, including request and response headers. We'll build on top of that.
 
 > VCL stands for Varnish Configuration Language and it is a DSL that abstracts request and response processing plus some additional, convenient APIs (like client information). VCL is not exactly the same as vanilla Varnish but for the sake of our course it is close enough.
 
-First thing you need to realize is that in many cases this is not simply client-server communication but there's additional stopover on the POP. You can compare it to the flight from Warsaw to New York, where you need to switch to another flight in London. Fastly has an abstraction over that, strictly distinguishing what's happening between client and pop and what's happening between pop and origin. Request from client to POP is abstracted as req and from POP to Origin is abstracted as bereq. Response from Origin to POP is abstracted as beresp and from POP to client as resp.
+First thing you need to realize is that in many cases, client-server communication involves an additional stopover at the POP, similar to a layover during a flight. Fastly has an abstraction over that, strictly distinguishing what's happening between client and POP and what's happening between POP and origin. Request from client to POP is abstracted as *req* and from POP to origin is abstracted as *bereq*. Response from origin to POP is abstracted as *beresp* and from POP to client as *resp*.
 
 ![Request/response abstraction](../../../public/lesson6/abstraction.png)
 
@@ -53,7 +53,7 @@ curl -v https://cdn-training.global.ssl.fastly.net/api/showheaders
 }
 ```
 
-First thing we can notice is that Fastly obviously adds some request headers in the fly (like `fastly-ssl` or `x-varnish`). Second, the `X-value-private` header is gone from Fastly response header but somehow `X-value-surprise` header pops in, even though it is not produced by our test API endpoint. How's that possible?
+The first thing we notice is that Fastly adds some request headers on the fly (like `fastly-ssl` or `x-varnish`). Second, the `X-value-private` header is gone from Fastly response header but somehow `X-value-surprise` header pops in, even though it is not produced by our test API endpoint. How's that possible?
 
 That magic happens due to the VCL snippet I added to the the service. Snippets allow to plug into request/response pipeline and modify behavior and data being sent. 
 
@@ -96,7 +96,7 @@ Slightly more complex scenario is for cache miss:
  - clean up response headers
 6. Entry gets cached and delivered - `vcl_deliver`
 
-### Note on response headers removal
+### Note on Response Headers Removal
 You may wonder if for our `/api/showheaders` test the following code would also work while set on `vcl_deliver` (notice using `resp` instead of `beresp`)
 ```vcl
 
