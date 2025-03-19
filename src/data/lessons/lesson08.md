@@ -47,3 +47,77 @@ Edge dictionaries are data structures very similar to dictionaries we know from 
 * route maps
 * traffic dispatching
 * storing configuration values
+
+To illustrate how edge dictionaries work let's implement a feature flag for our exising `/api/showheaders` endpoint. Similar to ACL, we first need to create the dictionary itself in order to be able to reference it in the VCL snippet. Also similar to ACL, only the name is required.
+
+![Warning](../../../public/lesson8/create-dictionary.png)
+
+It is time for a new VCL snippet:
+* **Name:** Handle feature flags
+* **Type:** recv
+* **VCL**:
+
+```varnish
+
+if (req.url.path == "/api/showheaders") {
+  if (!table.contains(feature_flags, "showheaders_enabled") || table.lookup(feature_flags, "showheaders_enabled") == "false") {
+    error 404 "Not Found";
+  }
+}
+```
+The important bits here are:
+- `table.lookup` gets the value from the given dictionary under the specified key
+- `table.contains` checks if the entry with a given key exists
+
+After this new configuration will be activated, `/api/showheaders` should start returning 404. To access that endpoint, go to *feature_flags* dictionary and add new dictionary entry with *showheaders_enabled* key and value set to *true*. Give it a second to propagate and you should be able to access the endpoint again. If you have a bad memory (as I do), remember to remove your IP address from the blacklist ACL or you'll get 401 instead of expected results.
+
+## Client Variable and Custom Errors
+
+VCL provides many interesting properties describing client requests. To highlight some:
+- client.as.name
+- client.geo.country_code
+- client.platform.mobile
+
+They allow to build pretty complex on-edge logic that would otherwise be hard or inefficient to implement on origin. To combine few advanced VCL features into a single example, let's build an artificial endpoint greeting only the mobile users. This will be fully on the Fastly side, no new endpoints will be added to the origin app. 
+
+How does that work? First, we need to go back to Lesson 6 and the state diagram that shows how request-respnse lifecycle works. You can see there that each subroutine can throw an error (a red arrow going out of it) and there's error subroutine that handles these errors (red arrow going in). Moreover, VCL supports error code values going beyond standard HTTP error values. In process, the vcl_error subroutine can catch only these errors, produce response (including HTML, custom headers, cookies, etc.) and deliver it.
+
+First, let's throw custom error if a given request comes from a mobile device. We need a new `vcl_recv` snippet with the following code:
+
+```varnish
+
+if (client.platform.mobile && req.url.path == "/api/hello") {
+  error 601;
+}
+```
+
+and the error handling snippet `vcl_error` looks as follows:
+
+```varnish
+
+if (obj.status == 601) {
+  set obj.status = 200;
+  set obj.response = "OK";
+  set obj.http.Content-Type = "text/plain";
+  synthetic "Hello mobile user";
+  return (deliver);
+}
+```
+
+In the above code we catch the custom error code we just produced, adjust it to HTTP 200 OK, set content-type, friendly message and force-push control straight to feliver phase. With that configuration enabled, we get 404 if we run vanilla curl:
+
+```powershell
+
+curl -v https://cdn-training.global.ssl.fastly.net/api/hello
+< HTTP/1.1 404 Not Found
+```
+
+but curl with fake mobile user agent returns the greeting as expected.
+
+```powershell
+
+curl -v https://cdn-training.global.ssl.fastly.net/api/hello --user-agent 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/114.0.5735.99 Mobile/15E148 Safari/604.1'
+< HTTP/1.1 200 OK
+<
+Hello mobile user
+```
