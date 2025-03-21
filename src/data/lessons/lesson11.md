@@ -1,9 +1,9 @@
 ---
-title: Edge Side Includes
-subtitle: How to build dynamic content using components with individual TTLs
+title: Terraforming Fastly
+subtitle: Configuration management with Terraform
 premium: true
 ---
 
 ## Placeholder Content
 
-This lesson explains how to build dynamic content using components with individual TTLs. 
+This lesson covers configuration management with Terraform. 

@@ -1,6 +1,6 @@
 ---
-title: Traffic Filtering
-subtitle: How to filter traffic based on different criteria
+title: Traffic Filtering and Backend Dispatching
+subtitle: How to filter traffic and handle multiple backends
 premium: true
 ---
 
