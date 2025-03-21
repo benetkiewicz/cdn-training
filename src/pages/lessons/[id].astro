@@ -22,7 +22,7 @@ if (post.data.premium) {
 const { Content } = await render(post);
 ---
 
-<LessonLayout>
+<LessonLayout title={post.data.title}>
     <h1>{post.data.title}</h1>
     <Content />
 

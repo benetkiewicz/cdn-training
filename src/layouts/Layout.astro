@@ -1,6 +1,12 @@
 ---
 import Nav from "../components/Nav.astro";
 import Footer from "../components/Footer.astro";
+
+interface Props {
+    title?: string;
+}
+
+const { title = "Learn Content Delivery Networks with Fastly" } = Astro.props;
 ---
 
 <!doctype html>
@@ -8,7 +14,7 @@ import Footer from "../components/Footer.astro";
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Learn Content Delivery Networks with Fastly</title>
+        <title>{title}</title>
         <meta
             name="description"
             content="Advanced guide to Content Delivery Networks (CDNs) for developers and web professionals. Learn Fastly and VCL in fun and easy to understand tutorials."
