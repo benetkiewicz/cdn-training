@@ -17,8 +17,6 @@ On the Fastly side we need to obtain the TLS certificate for the domain. This wi
 
 Fastly not only provides a CDN service but also a certificate authority. To access the certificate management UI, navigate to the Fastly dashboard, click on the "Security" tab, then select "TLS Management" and finally "Domains." This section allows you to manage your TLS certificates.
 
-![Fastly TLS Management UI](../../../public/lesson3/fastly-tls-management-ui.png)
-
 ![Domains management](../../../public/lesson3/domains-management.png)
 
 But before you can start requesting the certificate, make sure that the domain you request the TLS for is already configured in one of your Fastly CDN services. Assuming you want to use the domain `www.cdn-training.com`, you will replace your existing `prefix.global.ssl.fastly.net` from the previous lesson to `www.cdn-training.com` (or add next to it). Fastly TLS registration process will not allow you to advance if none of your services points to the domain you want to set up TLS for. Please also note that you should register the domain with the www subdomain.
