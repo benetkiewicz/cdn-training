@@ -18,7 +18,7 @@ If you don't have a Fastly account yet, you can sign up for a free account [here
 
 ![Create Fastly account](../../../public/lesson2/create-account.png)
 
-Once you fill in the registration form and convirm your email address, you'll be able to log in and will be presented with the main Fastly services panel. We want to start playing with the CDN services, so click *Create a CDN Service* link. You can either skip the simplified form and dive straight into configuration details or use the form to fast-forward your setup.
+Once you fill in the registration form and confirm your email address, you'll be able to log in and will be presented with the main Fastly services panel. We want to start playing with the CDN services, so click *Create a CDN Service* link. You can either skip the simplified form and dive straight into configuration details or use the form to fast-forward your setup.
 
 ![Create CDN service](../../../public/lesson2/create-service.png)
 
@@ -47,7 +47,7 @@ If you want to see the changes under the fastly URL, you can do one of the follo
 
 - Wait for the cache to expire (1 hour).
 - Purge the cache manually.
-- Add query parameters to the URL, like ?v=1.1.
+- Append query parameters to the URL, such as `?v=1.1`, to bypass the cache.
 
 To purge the cache manually, you can use the Fastly user interface. Go to your service main page (Service Summary) and find the *Purge* dropdown. It provides options to purge the specific URL or purge all. There's also a third option, purge key, which we will get to in the later part of this course.
 
