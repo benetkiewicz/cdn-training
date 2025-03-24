@@ -91,14 +91,16 @@ Slightly more complex scenario is for cache miss:
 2. Fastly calculates Cache Key
 3. It's a miss - `vcl_miss`
 4. Request goes to origin, origin returns response.
-5. `vcl_fetch` gets the fresh bits. Modifications made in this will affect the cached entry. This is typically where you would:
+5. `vcl_fetch` gets the fresh bits. Modifications made in this subroutine will affect the cached entry. This is typically where you would:
  - override cache time 
  - clean up response headers
 6. Entry gets cached and delivered - `vcl_deliver`
 
-### Note on Response Headers Removal
-You may wonder if for our `/api/showheaders` test the following code would also work while set on `vcl_deliver` (notice using `resp` instead of `beresp`)
-```vcl
+### Considerations for Response Header Modifications in VCL
+
+You may wonder if for our `/api/showheaders` test the following code would also work while set on `vcl_deliver` (notice using `resp` instead of `beresp`). 
+
+```varnish
 
 if (req.url.path == "/api/showheaders") {
   unset resp.http.X-value-private;
@@ -106,4 +108,6 @@ if (req.url.path == "/api/showheaders") {
 }
 ```
 
-The answer is Yes! This is not the recommended approach though, since it's being run on each deliver (regardless of hit or miss), while the cached entry still contains the data we want to hide. It's just better to craft the cached entry in the way we want it to be delivered without any additional processing.
+The answer is Yes, but there is a key distinction between `vcl_fetch` and `vcl_deliver` that makes the former a better choice in this scenario. The `vcl_fetch` subroutine is executed when a response is fetched from the origin and before it is cached. This means any modifications made here, such as removing or adding headers, are applied to the cached entry itself, ensuring consistent delivery without additional processing. By crafting the cached entry during `vcl_fetch`, you ensure that subsequent requests for the same resource can be served directly from the cache without requiring further modifications, leading to faster response times and reduced server load.
+
+On the other hand, `vcl_deliver` is executed every time a response is delivered to the client, regardless of whether it was a cache hit or miss. Modifying headers in `vcl_deliver` can lead to unnecessary processing overhead because the same modifications are repeated for every request. Additionally, this approach may result in inconsistent cached entries, as the cached data remains unaltered while the delivered response is modified dynamically. For optimal performance, reduced processing overhead, and predictable caching behavior, it is recommended to make such modifications in `vcl_fetch` whenever possible.

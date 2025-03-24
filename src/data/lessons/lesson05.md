@@ -91,7 +91,8 @@ app.get('/api/getheaderdate', (req, res) => {
 });
 ```
 
-You cannot simple make sure that this header is properly set as it is not visible in the response headers by dafault because it is internal slang of CDNs. Fortunately Fastly provides a way to peek some internals it is passing inside its infrastructure. The magic spell is `Fastly-Debug` header:
+You cannot simply verify that this header is properly set as it is not visible in the response headers by default. This is because CDNs, including Fastly, strip out the `Surrogate-Control` header for internal use, treating it as a directive for their caching mechanisms. Fortunately, Fastly provides a way to peek into some of its internal operations by using the `Fastly-Debug` header:
+
 ```powershell
 
 curl -v https://cdn-training.global.ssl.fastly.net/api/getheaderdate -H "Fastly-Debug: 1"
@@ -101,4 +102,4 @@ curl -v https://cdn-training.global.ssl.fastly.net/api/getheaderdate -H "Fastly-
 < Surrogate-Control: max-age=15
 ```
 
-This endpoint will now behave exactly the same as the `/api/getfastlyuidate` we configured in Fasly UI.
+This endpoint will now behave exactly the same as the `/api/getfastlyuidate` we configured in Fastly UI.
