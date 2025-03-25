@@ -1,0 +1,39 @@
+---
+import LessonLayout from "../layouts/LessonLayout.astro";
+---
+<LessonLayout title="Availability">
+    <style slot="head">
+        .link-list {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .link-list a {
+            text-decoration: none;
+        }
+        .link-list img {
+            border-radius: 8px;
+            box-shadow: 0 2px 4px #0000001a;
+            border: 1px solid var(--secondary);
+        }
+        a {
+            color: var(--text);
+            text-decoration: underline;
+        }
+    </style>
+    <h1>Invite Me</h1>
+    <p>
+        I am available for events, conferences, and meetups. I can give talks on various topics related to CDN, web performance, and more.
+        </p>
+        <p>I have some experience in giving talks for local user groups and on internal company courses. I'd love to give a presentation to a bigger audience on the IT conference.</p>
+        <div class="link-list">
+            <a href="#"><img src="/talk-bydgoszcz.jpg" alt="Availability" width="300" height="auto" /></a>
+            <a href="#"><img src="/talk-torun.jpg" alt="Availability" width="300" height="auto" /></a>
+            <a href="#"><img src="/talk-slides.png" alt="Availability" width="300" height="auto" /></a>
+        </div>
+    <p>
+        If you want to invite me to your event, please <strong><a href="mailto:pbenetkiewicz@gmail.com">drop me a line</a></strong>. I will get back to you as soon as possible.
+    </p>
+
+</LessonLayout>
