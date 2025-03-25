@@ -10,13 +10,13 @@ ACL stands for Access Control List. It is a simple data structure designed to st
 * banning/blocking IP 
 * tricking IP to consume fake response (very useful for scrapers!)
 * origin dispatching per IP
-* whitilisting IP (ex. to never get rate limiting)
+* whitelisting IP (ex. to never get rate limiting)
 
 Let's implement the simplest block feature. First we need to create the ACL:
 
 ![Create ACL](../../../public/lesson8/create-acl.png)
 
-The only thing to privide on the Create ACL form is name. It should be self-explanatory because it will be used as a handle to reference to in the VCL. Note that right after ACL creation, Fastly will throw a warning about unused ACL. We'll fix it in a moment.
+The only thing to provide on the Create ACL form is name. It should be self-explanatory because it will be used as a handle to reference to in the VCL. Note that right after ACL creation, Fastly will throw a warning about unused ACL. We'll fix it in a moment.
 
 ![Warning](../../../public/lesson8/warning.png)
 
@@ -42,13 +42,13 @@ curl -v https://cdn-training.global.ssl.fastly.net/api/getdate
 
 ## Edge Dictionaries
 
-Edge dictionaries are data structures very similar to dictionaries we know from other high-level programming languages, just hosted and distributed on POPs. They are simple key-value pairs with VCL API to check presence of the key and read value under the key. They are common in the following scenarios:
+Edge dictionaries are data structures very similar to dictionaries we know from other high-level programming languages, as they store data in key-value pairs. However, unlike traditional dictionaries, edge dictionaries are hosted and distributed across Fastly's Points of Presence (POPs), making them accessible globally with low latency. They also provide a VCL API to check the presence of a key and retrieve its value. They are common in the following scenarios:
 * feature flags
 * route maps
 * traffic dispatching
 * storing configuration values
 
-To illustrate how edge dictionaries work let's implement a feature flag for our exising `/api/showheaders` endpoint. Similar to ACL, we first need to create the dictionary itself in order to be able to reference it in the VCL snippet. Also similar to ACL, only the name is required.
+To illustrate how edge dictionaries work let's implement a feature flag for our existing `/api/showheaders` endpoint. Similar to ACL, we first need to create the dictionary itself in order to be able to reference it in the VCL snippet. Also similar to ACL, only the name is required.
 
 ![Warning](../../../public/lesson8/create-dictionary.png)
 
@@ -80,7 +80,7 @@ VCL provides many interesting properties describing client requests. To highligh
 
 They allow to build pretty complex on-edge logic that would otherwise be hard or inefficient to implement on origin. To combine few advanced VCL features into a single example, let's build an artificial endpoint greeting only the mobile users. This will be fully on the Fastly side, no new endpoints will be added to the origin app. 
 
-How does that work? First, we need to go back to Lesson 6 and the state diagram that shows how request-respnse lifecycle works. You can see there that each subroutine can throw an error (a red arrow going out of it) and there's error subroutine that handles these errors (red arrow going in). Moreover, VCL supports error code values going beyond standard HTTP error values. In process, the vcl_error subroutine can catch only these errors, produce response (including HTML, custom headers, cookies, etc.) and deliver it.
+How does that work? First, we need to go back to Lesson 6 and the state diagram that shows how request-response lifecycle works. You can see there that each subroutine can throw an error (a red arrow going out of it) and there's error subroutine that handles these errors (red arrow going in). Moreover, VCL supports error code values going beyond standard HTTP error values. In process, the vcl_error subroutine can catch only these errors, produce response (including HTML, custom headers, cookies, etc.) and deliver it.
 
 First, let's throw custom error if a given request comes from a mobile device. We need a new `vcl_recv` snippet with the following code:
 
@@ -104,7 +104,7 @@ if (obj.status == 601) {
 }
 ```
 
-In the above code we catch the custom error code we just produced, adjust it to HTTP 200 OK, set content-type, friendly message and force-push control straight to feliver phase. With that configuration enabled, we get 404 if we run vanilla curl:
+In the above code we catch the custom error code we just produced, adjust it to HTTP 200 OK, set content-type, friendly message and force-push control straight to deliver phase. With that configuration enabled, we get 404 if we run vanilla curl:
 
 ```powershell
 
@@ -112,11 +112,14 @@ curl -v https://cdn-training.global.ssl.fastly.net/api/hello
 < HTTP/1.1 404 Not Found
 ```
 
-but curl with fake mobile user agent returns the greeting as expected.
+but using curl with a user agent string that simulates a mobile device for testing purposes returns the greeting as expected.
 
 ```powershell
 
-curl -v https://cdn-training.global.ssl.fastly.net/api/hello --user-agent 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/114.0.5735.99 Mobile/15E148 Safari/604.1'
+curl -v https://cdn-training.global.ssl.fastly.net/api/hello \
+  --user-agent 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) \
+  AppleWebKit/605.1.15 (KHTML, like Gecko) \
+  CriOS/114.0.5735.99 Mobile/15E148 Safari/604.1'
 < HTTP/1.1 200 OK
 <
 Hello mobile user
