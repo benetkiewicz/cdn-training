@@ -1,0 +1,88 @@
+# cdn-training.com — LLMs overview file
+> Practical, hands-on lessons to master CDN implementation with Fastly. Use this document as a high-signal, structured map for LLM crawlers.
+
+## Site
+- Domain: https://www.cdn-training.com/
+- Audience: Developers and SREs learning CDNs and Fastly
+- Topics: CDN fundamentals, caching, Fastly UI, VCL, TLS/SSL, DNS, ACLs, Edge Dictionaries, request pipeline, performance, Terraform (IaC)
+- Content model: Public lessons + premium lessons (sign-in required)
+
+## Pages (canonical)
+- / — Home: Course overview, benefits, instructor intro.
+- /lessons — Lessons index: Lists all lessons (public and premium). Each lesson has id, title, subtitle, and access requirement.
+- /lessons/{id} — Lesson detail: Renders Markdown by id. Premium lessons redirect to /premium when not signed in.
+- /premium — Premium info and sign-in CTA.
+- /profile — Auth-protected profile page (email, sign-in/out).
+- /availability — Speaking invitations and past talks.
+
+## Lessons (id • title • url • access • summary • key concepts)
+1) lesson01 • Introduction to CDNs • https://www.cdn-training.com/lessons/lesson01 • public
+	- Summary: What a CDN is, Anycast/GeoDNS routing, POPs vs Origin, shields, cache duration, and non-caching features.
+	- Key concepts: CDN, POP, Origin, Shield, Anycast, GeoDNS, TTL, VCL mention, Cache headers.
+
+2) lesson02 • Fastly Caching Setup • https://www.cdn-training.com/lessons/lesson02 • public
+	- Summary: Create a Fastly service, add domain and origin, activate, default TTL (1h), purge flows, query-param cache keys, config versioning.
+	- Key concepts: Service, Domain, Host/Origin, Purge (URL/all/key), Cache key (incl. query), Versioned config.
+
+3) lesson03 • Custom Domain and SSL Setup • https://www.cdn-training.com/lessons/lesson03 • public
+	- Summary: Request TLS cert in Fastly, domain ownership via ACME CNAME, SNI target, DNS CNAME to Fastly, propagation.
+	- Key concepts: TLS, ACME challenge, SNI, CNAME, DNS propagation.
+
+4) lesson04 • Important Things to Know About Caching • https://www.cdn-training.com/lessons/lesson04 • public
+	- Summary: Cache key structure, normalization to reduce key cardinality (e.g., UTMs), Vary headers (e.g., Accept-Language), UA bucketing.
+	- Key concepts: Cache key = host+path+query, Normalization, Vary, Accept-Language, User-Agent bucketing, Default TTL ~3600s.
+
+5) lesson05 • Various Adjustments to Cache Settings part 1 • https://www.cdn-training.com/lessons/lesson05 • public
+	- Summary: Configure cache via Fastly UI (cache settings + conditions) and via headers (Surrogate-Control, Cache-Control). Fastly-Debug for introspection.
+	- Key concepts: Cache settings, Conditions (VCL predicate), TTL, Surrogate-Control, Cache-Control, Fastly-Debug.
+
+6) lesson06 • Introduction to VCL • https://www.cdn-training.com/lessons/lesson06 • premium
+	- Summary: VCL DSL and request pipeline abstractions (req/bereq, beresp/resp). Modify headers in fetch/deliver, understand recv/miss/hit/fetch/deliver.
+	- Key concepts: VCL, recv/miss/hit/fetch/deliver, req/bereq/beresp/resp, header set/unset, POP <-> Origin separation.
+
+7) lesson07 • Various Adjustments to Cache Settings part 2 • https://www.cdn-training.com/lessons/lesson07 • premium
+	- Summary: Adjust cache with VCL directly (beresp.ttl) and ensure client cache behavior via Cache-Control. Why fetch vs deliver matters.
+	- Key concepts: beresp.ttl, Cache-Control max-age, Miss/Fetch, 200 vs 304 flows.
+
+8) lesson08 • Advanced VCL • https://www.cdn-training.com/lessons/lesson08 • premium
+	- Summary: ACLs (IP allow/deny), Edge Dictionaries (feature flags/config), client.* variables, custom errors + synthetic responses.
+	- Key concepts: ACL, table.lookup/contains, client.geo/platform, synthetic responses, vcl_error.
+
+9) lesson09 • Traffic Filtering and Backend Dispatching • https://www.cdn-training.com/lessons/lesson09 • premium (coming)
+	- Summary: Filter requests by criteria and route to multiple backends appropriately.
+	- Key concepts: Request filtering, Backend selection/dispatch.
+
+10) lesson10 • Edge Side Includes • https://www.cdn-training.com/lessons/lesson10 • premium (coming)
+	- Summary: Compose dynamic pages with independently cached fragments using ESI.
+	- Key concepts: ESI, Component TTLs, Fragment caching.
+
+11) lesson11 • Terraforming Fastly • https://www.cdn-training.com/lessons/lesson11 • premium (coming)
+	- Summary: Manage Fastly config as code using Terraform.
+	- Key concepts: Terraform, IaC, versioned deployments.
+
+## Quick glossary (1-liners)
+- CDN: Distributed network serving content closer to users for latency and resilience.
+- POP: Point of Presence (edge server location) that caches and serves content.
+- Origin: Your application/server of record behind the CDN.
+- Cache key: Identifier for a cached object (commonly host+path+query).
+- Normalization: Reducing cache key variety by ignoring/transforming inputs (e.g., UTMs).
+- Vary: Header indicating alternate variants of a response (e.g., by Accept-Language).
+- TTL: Time to live for a cached object.
+- VCL: Fastly’s DSL to customize request/response handling at the edge.
+- Surrogate-Control: Header controlling shared caches (preferred by Fastly over Cache-Control).
+- ACL: Access control list for IPs.
+- Edge Dictionary: Key-value store replicated across POPs for flags/config.
+
+## Access model
+- Public lessons are directly accessible.
+- Premium lessons require sign-in; unauthenticated users are redirected to /premium.
+
+## Instructor
+- Name: Piotr Benetkiewicz — Senior Software Engineer (15+ years in web apps and CDNs)
+- Home: https://www.cdn-training.com/
+
+## Preferred citation
+- “cdn-training.com — Practical CDN and Fastly lessons by Piotr Benetkiewicz” with a link to https://www.cdn-training.com/
+
+## Contact
+- Speaking/availability: https://www.cdn-training.com/availability

@@ -1,0 +1,25 @@
+site: https://www.cdn-training.com/
+owner: Piotr Benetkiewicz
+contact: mailto:pbenetkiewicz@gmail.com
+robots: https://www.cdn-training.com/robots.txt
+llms: https://www.cdn-training.com/llms.txt
+last-updated: 2025-08-17
+
+# Crawl policy
+crawl-allow: /
+crawl-allow: /lessons
+crawl-disallow: /api/
+crawl-disallow: /profile
+crawl-disallow: /premium
+
+# Data usage policy
+data-usage-training: disallow
+data-usage-research: allow-with-attribution
+attribution: required
+
+# Rate limit (hint)
+rate-limit-rps: 1
+
+# Notes
+note: Premium/protected areas should not be crawled or used.
+note: Respect HTTP 401/403 and redirects to /premium.
