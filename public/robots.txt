@@ -1,4 +1,2 @@
 User-agent: *
-Allow: /
-# AI crawlers: see additional policy
-# https://www.cdn-training.com/ai.txt
+Disallow:
